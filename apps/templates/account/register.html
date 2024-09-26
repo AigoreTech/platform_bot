@@ -1,0 +1,218 @@
+<!-- File: apps/templates/account/register.html -->
+{% extends 'home/base.html' %}
+
+{% block title %}Register - Platform Bot{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="text-center bg-primary text-white py-3" style="border-radius: 10px 10px 0 0;">
+        <i class="bi bi-person-plus-fill"></i> Registrasi Pengguna Baru
+    </h2>
+    <div class="card shadow-lg mt-4 bg-light">
+        <div class="card-body p-5">
+            <!-- Form Error Display -->
+            {% if form.errors %}
+                <div class="alert alert-danger">
+                    {% for field, errors in form.errors.items %}
+                        <strong>{{ field }}</strong>
+                        {% for error in errors %}
+                            <div>{{ error }}</div>
+                        {% endfor %}
+                    {% endfor %}
+                </div>
+            {% endif %}
+            
+            <!-- Registration Form -->
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                
+                <!-- First Name and Last Name Fields -->
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label class="fw-bold" for="id_first_name">
+                            <i class="bi bi-person-fill"></i> {{ form.first_name.label }}
+                        </label>
+                        <div class="form-control border border-primary">
+                            {{ form.first_name }}
+                        </div>
+                        {% if form.first_name.errors %}
+                            <div class="text-danger">{{ form.first_name.errors }}</div>
+                        {% endif %}
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label class="fw-bold" for="id_last_name">
+                            <i class="bi bi-person-fill"></i> {{ form.last_name.label }}
+                        </label>
+                        <div class="form-control border border-primary">
+                            {{ form.last_name }}
+                        </div>
+                        {% if form.last_name.errors %}
+                            <div class="text-danger">{{ form.last_name.errors }}</div>
+                        {% endif %}
+                    </div>
+                </div>
+                
+                <!-- Username and Email Fields -->
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label class="fw-bold" for="id_username">
+                            <i class="bi bi-person-circle"></i> {{ form.username.label }}
+                        </label>
+                        <div class="form-control border border-primary">
+                            {{ form.username }}
+                        </div>
+                        {% if form.username.errors %}
+                            <div class="text-danger">{{ form.username.errors }}</div>
+                        {% endif %}
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label class="fw-bold" for="id_email">
+                            <i class="bi bi-envelope-fill"></i> {{ form.email.label }}
+                        </label>
+                        <div class="form-control border border-primary">
+                            {{ form.email }}
+                        </div>
+                        {% if form.email.errors %}
+                            <div class="text-danger">{{ form.email.errors }}</div>
+                        {% endif %}
+                    </div>
+                </div>
+                
+                <!-- Password Fields -->
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label class="fw-bold" for="id_password1">
+                            <i class="bi bi-lock-fill"></i> {{ form.password1.label }}
+                        </label>
+                        <div class="form-control border border-primary">
+                            {{ form.password1 }}
+                        </div>
+                        {% if form.password1.errors %}
+                            <div class="text-danger">{{ form.password1.errors }}</div>
+                        {% endif %}
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label class="fw-bold" for="id_password2">
+                            <i class="bi bi-lock-fill"></i> {{ form.password2.label }}
+                        </label>
+                        <div class="form-control border border-primary">
+                            {{ form.password2 }}
+                        </div>
+                        {% if form.password2.errors %}
+                            <div class="text-danger">{{ form.password2.errors }}</div>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <!-- Company and Address Fields -->
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label class="fw-bold" for="id_company">
+                            <i class="bi bi-building"></i> {{ form.company.label }}
+                        </label>
+                        <div class="form-control border border-primary">
+                            {{ form.company }}
+                        </div>
+                        {% if form.company.errors %}
+                            <div class="text-danger">{{ form.company.errors }}</div>
+                        {% endif %}
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label class="fw-bold" for="id_address">
+                            <i class="bi bi-geo-alt-fill"></i> {{ form.address.label }}
+                        </label>
+                        <div class="form-control border border-primary">
+                            {{ form.address }}
+                        </div>
+                        {% if form.address.errors %}
+                            <div class="text-danger">{{ form.address.errors }}</div>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <!-- City and Country Fields -->
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label class="fw-bold" for="id_city">
+                            <i class="bi bi-building"></i> {{ form.city.label }}
+                        </label>
+                        <div class="form-control border border-primary">
+                            {{ form.city }}
+                        </div>
+                        {% if form.city.errors %}
+                            <div class="text-danger">{{ form.city.errors }}</div>
+                        {% endif %}
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label class="fw-bold" for="id_country">
+                            <i class="bi bi-globe"></i> {{ form.country.label }}
+                        </label>
+                        <div class="form-control border border-primary">
+                            {{ form.country }}
+                        </div>
+                        {% if form.country.errors %}
+                            <div class="text-danger">{{ form.country.errors }}</div>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <!-- Postal Code and About Fields -->
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label class="fw-bold" for="id_postal_code">
+                            <i class="bi bi-mailbox"></i> {{ form.postal_code.label }}
+                        </label>
+                        <div class="form-control border border-primary">
+                            {{ form.postal_code }}
+                        </div>
+                        {% if form.postal_code.errors %}
+                            <div class="text-danger">{{ form.postal_code.errors }}</div>
+                        {% endif %}
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label class="fw-bold" for="id_about">
+                            <i class="bi bi-chat-left-text"></i> {{ form.about.label }}
+                        </label>
+                        <div class="form-control border border-primary">
+                            {{ form.about }}
+                        </div>
+                        {% if form.about.errors %}
+                            <div class="text-danger">{{ form.about.errors }}</div>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <!-- Foto Profile -->
+                <div class="form-group text-center mb-3">
+                    <label class="fw-bold" for="id_foto_profile">
+                        <i class="bi bi-camera-fill"></i> {{ form.foto_profile.label }}
+                    </label>
+                    <div class="form-control border border-primary">
+                        {{ form.foto_profile }}
+                    </div>
+                    {% if form.foto_profile.errors %}
+                        <div class="text-danger">{{ form.foto_profile.errors }}</div>
+                    {% endif %}
+                </div>
+
+                <!-- Submit Button -->
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary my-3">
+                        <i class="bi bi-person-plus-fill"></i> Daftar
+                    </button>
+										 <!-- Login Link -->
+                    <div class="card-footer text-center">
+                        <p>Sudah punya akun?
+                            <a href="{% url 'login' %}" class="text-primary fw-bold">
+                                <i class="bi bi-box-arrow-in-right"></i> Masuk
+                            </a>
+                        </p>
+                    </div>
+
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
+

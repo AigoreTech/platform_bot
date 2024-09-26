@@ -1,0 +1,121 @@
+<!-- File: apps/templates/home/home.html -->
+
+{% extends 'home/base.html' %}
+
+{% block content %}
+<!-- Hero Section -->
+<div class="jumbotron bg-primary text-white rounded p-4 mb-5 text-center">
+    <h1 class="display-4"><i class="bi bi-lightbulb-fill me-2"></i>Selamat Datang di Platform Bot!</h1>
+    <p class="lead">Temukan solusi otomatisasi terbaik untuk kebutuhan bot Anda. Platform kami menawarkan berbagai fitur canggih untuk mempermudah pekerjaan Anda.</p>
+    <hr class="my-4">
+    <p>Mulai dengan mendaftar atau login untuk akses penuh ke fitur-fitur hebat kami.</p>
+    <a class="btn btn-light btn-lg mb-3" href="{% url 'register' %}" role="button">Mulai Sekarang</a>
+    <p class="mt-3">Sudah punya akun? <a class="text-light" href="{% url 'login' %}">Masuk di sini</a></p>
+</div>
+
+<!-- Feature Section -->
+<div class="container mb-5">
+    <h2 class="text-center mb-4">Fitur Unggulan Kami</h2>
+    <div class="row">
+        <div class="col-md-4 mb-4">
+            <div class="card border-0 shadow-sm bg-light h-100 text-center">
+                <div class="card-body">
+                    <i class="bi bi-robot fs-1 text-primary mb-3"></i>
+                    <h5 class="card-title">Automatisasi Bot</h5>
+                    <p class="card-text">Manfaatkan kemampuan otomatisasi kami untuk mengoptimalkan tugas-tugas rutin dan proses kerja Anda dengan bot yang mudah disesuaikan.</p>
+                    <a href="#" class="btn btn-primary">Pelajari Lebih Lanjut</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="card border-0 shadow-sm bg-light h-100 text-center">
+                <div class="card-body">
+                    <i class="bi bi-gear fs-1 text-primary mb-3"></i>
+                    <h5 class="card-title">Pengaturan Fleksibel</h5>
+                    <p class="card-text">Sesuaikan setiap aspek bot Anda dengan pengaturan yang fleksibel dan antarmuka yang intuitif. Kontrol penuh ada di tangan Anda.</p>
+                    <a href="#" class="btn btn-primary">Pelajari Lebih Lanjut</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="card border-0 shadow-sm bg-light h-100 text-center">
+                <div class="card-body">
+                    <i class="bi bi-bar-chart-line fs-1 text-primary mb-3"></i>
+                    <h5 class="card-title">Analitik Mendalam</h5>
+                    <p class="card-text">Dapatkan wawasan mendalam dengan fitur analitik kami. Pantau performa bot Anda dan ambil keputusan yang lebih baik berdasarkan data.</p>
+                    <a href="#" class="btn btn-primary">Pelajari Lebih Lanjut</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Testimonial Section -->
+<div class="container mb-5">
+    <h2 class="text-center mb-4">Apa Kata Pengguna Kami</h2>
+    <div class="row">
+        <div class="col-md-4 mb-4">
+            <div class="card border-light shadow-sm bg-white h-100">
+                <div class="card-body">
+                    <i class="bi bi-people-fill fs-2 text-primary mb-3"></i>
+                    <p class="card-text">"Platform Bot telah mengubah cara kami bekerja. Fitur-fitur canggih dan antarmuka yang ramah pengguna membuat pekerjaan kami jauh lebih efisien."</p>
+                    <footer class="blockquote-footer">Jane Doe, <cite title="Source Title">CEO ExampleCorp</cite></footer>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="card border-light shadow-sm bg-white h-100">
+                <div class="card-body">
+                    <i class="bi bi-chat-left-quote fs-2 text-primary mb-3"></i>
+                    <p class="card-text">"Saya sangat terkesan dengan dukungan pelanggan dan fungsionalitas yang ditawarkan. Platform ini sangat membantu dalam otomatisasi tugas sehari-hari."</p>
+                    <footer class="blockquote-footer">John Smith, <cite title="Source Title">Freelancer</cite></footer>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="card border-light shadow-sm bg-white h-100">
+                <div class="card-body">
+                    <i class="bi bi-star-fill fs-2 text-primary mb-3"></i>
+                    <p class="card-text">"Sangat mudah untuk mengintegrasikan dengan sistem yang sudah ada. Platform ini benar-benar memenuhi kebutuhan kami."</p>
+                    <footer class="blockquote-footer">Alice Johnson, <cite title="Source Title">Product Manager</cite></footer>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Latest News Section -->
+<div class="container mb-5">
+    <h2 class="text-center mb-4">Berita Terbaru</h2>
+    <div class="row text-center">
+        <div class="col-md-6 mb-4">
+            <div class="card border-0 shadow-sm bg-info text-white h-100">
+                <div class="card-body">
+                    <i class="bi bi-info-circle fs-2 mb-3"></i>
+                    <h5 class="card-title">Update Terbaru: Fitur X Dirilis</h5>
+                    <p class="card-text">Kami baru saja meluncurkan fitur X yang akan mempermudah proses Y. Baca lebih lanjut tentang apa yang baru di versi ini.</p>
+                    <a href="#" class="btn btn-light">Baca Selengkapnya</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 mb-4">
+            <div class="card border-0 shadow-sm bg-warning text-dark h-100">
+                <div class="card-body">
+                    <i class="bi bi-file-earmark-text fs-2 mb-3"></i>
+                    <h5 class="card-title">Panduan Lengkap: Cara Menggunakan Platform Bot</h5>
+                    <p class="card-text">Ikuti panduan kami untuk memanfaatkan semua fitur Platform Bot dengan maksimal. Dapatkan tips dan trik dari para ahli kami.</p>
+                    <a href="#" class="btn btn-dark">Pelajari Lebih Lanjut</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Call to Action Section -->
+<div class="bg-success text-white p-5 text-center">
+    <h2>Siap untuk Memulai?</h2>
+    <p class="lead">Daftar sekarang untuk mendapatkan akses penuh ke semua fitur hebat kami dan mulai meningkatkan produktivitas Anda hari ini!</p>
+    <a class="btn btn-light btn-lg" href="{% url 'register' %}" role="button">Daftar Sekarang</a>
+</div>
+{% endblock %}
+

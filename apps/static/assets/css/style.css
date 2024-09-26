@@ -1,0 +1,58 @@
+/* File: apps/static/assets/css/style.css */
+
+:root {
+    --offcanvas-width: 270px;
+    --topNavbarHeight: 56px; /* Perbaiki dari --topNavbarMeight menjadi --topNavbarHeight */
+}
+
+.sidebar-nav {
+    width: var(--offcanvas-width);
+}
+
+.sidebar-link {
+    display: flex;
+    align-items: center;
+}
+
+.sidebar-link .right-icon {
+    display: inline-flex;
+    transition: all ease 0.25s;
+}
+
+.sidebar-link[aria-expanded="true"] .right-icon {
+    transform: rotate(180deg);
+}
+
+@media (min-width: 992px) {
+    /* Pastikan sidebar selalu muncul di desktop */
+    .offcanvas-start {
+        transform: none !important;
+        visibility: visible !important;
+        position: fixed;
+        top: var(--topNavbarHeight);
+        height: calc(100% - var(--topNavbarHeight));
+        z-index: 1030; /* Pastikan sidebar di atas konten lainnya */
+    }
+
+    /* Tambahkan margin untuk konten utama agar tidak tertutup sidebar */
+    main {
+        margin-left: var(--offcanvas-width);
+        margin-top: var(--topNavbarHeight);
+    }
+
+    /* Pastikan navbar berada di atas sidebar */
+    .navbar {
+        z-index: 1040; /* Lebih tinggi dari sidebar */
+    }
+}
+
+@media (max-width: 991.98px) {
+    /* Sembunyikan sidebar di mobile */
+    .offcanvas-start {
+        transform: translateX(-100%);
+    }
+
+    .offcanvas-start.show {
+        transform: translateX(0); /* Munculkan sidebar saat tombol ditekan */
+    }
+}

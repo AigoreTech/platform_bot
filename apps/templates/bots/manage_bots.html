@@ -1,0 +1,118 @@
+<!-- File: apps/templates/bots/manage_bots.html -->
+
+{% extends 'dashboard/base.html' %}
+
+{% block content %}
+<div class="container my-5">
+    <!-- Header Section -->
+    <div class="bg-primary text-white text-center p-4 rounded mb-4">
+        <h1 class="display-6"><i class="bi bi-robot"></i> Manage Your Bots</h1>
+        <p class="lead">Easily manage, edit, and monitor your Telegram and WhatsApp bots</p>
+    </div>
+
+    <!-- Bots Cards -->
+    <div class="row">
+        {% for bot in bots %}
+        <div class="col-md-6 col-lg-4 mb-4">
+            <div class="card shadow-sm h-100">
+                <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0">
+                        <i class="bi bi-robot"></i> {{ bot.name }}
+                    </h5>
+                    <span class="badge {{ bot.is_active|yesno:'bg-success,bg-danger' }}">
+                        {{ bot.is_active|yesno:'Active,Inactive' }}
+                    </span>
+                </div>
+
+                <div class="card-body">
+                    <!-- Platform -->
+                    <p><strong>Platform:</strong>
+                        {% if bot.bot_type == 'telegram' %}
+                        <i class="bi bi-telegram text-info"></i> Telegram
+                        {% elif bot.bot_type == 'whatsapp' %}
+                        <i class="bi bi-whatsapp text-success"></i> WhatsApp
+                        {% endif %}
+                    </p>
+
+                    <!-- Credentials (hanya untuk Telegram) -->
+                    {% if bot.bot_type == 'telegram' %}
+                    <p><strong>Credentials:</strong></p>
+                    <ul class="list-unstyled">
+                        <li><i class="bi bi-key-fill"></i> <strong>Token:</strong> {{ bot.token_telegram }}</li>
+                    </ul>
+                    {% endif %}
+
+                    <!-- Commands -->
+                    <p><strong>Commands:</strong></p>
+                    <table class="table table-sm table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Command</th>
+                                <th>Response</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for command in bot.commands.all %}
+                            <tr>
+                                <td><strong>{{ command.command }}</strong></td>
+                                <td>{{ command.response }}</td>
+                                <td>
+                                    <div class="d-flex gap-2">
+                                        <a href="{% url 'edit_command' command.id %}" class="btn btn-warning btn-sm">
+                                            <i class="bi bi-pencil"></i> Edit
+                                        </a>
+                                        <form method="post" style="display:inline;">
+                                            {% csrf_token %}
+                                            <button type="submit" name="delete_command" value="{{ command.id }}" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this command?');">
+                                                <i class="bi bi-trash"></i> Delete
+                                            </button>
+                                        </form>
+                                    </div>
+                                </td>
+                            </tr>
+                            {% empty %}
+                            <tr>
+                                <td colspan="3" class="text-center">No commands available.</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+
+                    <!-- Add Command Button -->
+                    <a href="{% url 'add_command' bot.id %}" class="btn btn-success btn-sm mt-2">
+                        <i class="bi bi-plus-circle"></i> Add Command
+                    </a>
+                </div>
+
+                <!-- Card Footer: Actions -->
+                <div class="card-footer bg-light">
+                    <div class="d-flex justify-content-between">
+                        <a href="{% url 'edit_bot' bot.id %}" class="btn btn-primary btn-sm">
+                            <i class="bi bi-pencil"></i> Edit Bot
+                        </a>
+                        <form method="post" style="display:inline;">
+                            {% csrf_token %}
+                            <button type="submit" name="delete" value="{{ bot.id }}" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this bot?');">
+                                <i class="bi bi-trash"></i> Delete
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="col-12">
+            <div class="alert alert-warning text-center" role="alert">
+                No bots available.
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <!-- Button to Create New Bot -->
+    <div class="text-center mt-4">
+        <a href="{% url 'create_bot' %}" class="btn btn-lg btn-primary">
+            <i class="bi bi-plus-circle"></i> Create New Bot </a> </div>
+</div> 
+{% endblock %} 

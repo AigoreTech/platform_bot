@@ -1,0 +1,121 @@
+<!-- apps/templates/users/profile.html -->
+{% extends "dashboard/base.html" %}
+
+{% block content %}
+<div class="content">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card bg-light shadow-sm">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="title">
+                        <i class="bi bi-pencil-square"></i> Edit Profile
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <form method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+
+                        <!-- Username dan Email -->
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="fw-bold"><i class="bi bi-person-fill"></i> Username</label>
+                                    {{ form.username }}
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="fw-bold"><i class="bi bi-envelope-fill"></i> Email</label>
+                                    {{ form.email }}
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- First Name dan Last Name -->
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="fw-bold"><i class="bi bi-file-person"></i> First Name</label>
+                                    {{ form.first_name }}
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="fw-bold"><i class="bi bi-file-person-fill"></i> Last Name</label>
+                                    {{ form.last_name }}
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Company -->
+                        <div class="form-group mb-3">
+                            <label class="fw-bold"><i class="bi bi-building"></i> Company</label>
+                            {{ form.company }}
+                        </div>
+
+                        <!-- Address -->
+                        <div class="form-group mb-3">
+                            <label class="fw-bold"><i class="bi bi-house"></i> Address</label>
+                            {{ form.address }}
+                        </div>
+
+                        <!-- City, Country, Postal Code -->
+                        <div class="row mb-3">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="fw-bold"><i class="bi bi-geo-alt-fill"></i> City</label>
+                                    {{ form.city }}
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="fw-bold"><i class="bi bi-globe2"></i> Country</label>
+                                    {{ form.country }}
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="fw-bold"><i class="bi bi-envelope"></i> Postal Code</label>
+                                    {{ form.postal_code }}
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- About Me -->
+                        <div class="form-group mb-3">
+                            <label class="fw-bold"><i class="bi bi-info-circle"></i> About Me</label>
+                            {{ form.about }}
+                        </div>
+
+                        <!-- Profile Picture -->
+                        <div class="form-group mb-3">
+                            <label class="fw-bold"><i class="bi bi-camera"></i> Profile Picture</label>
+                            {{ form.foto_profile }}
+                        </div>
+
+                        <!-- Submit Button -->
+                        <button type="submit" class="btn btn-fill btn-success">
+                            <i class="bi bi-save"></i> Save
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bagian Preview Profile -->
+        <div class="col-md-4">
+            <div class="card card-user text-center shadow-sm">
+                <div class="card-body">
+                    <div class="author">
+                        <img class="avatar img-fluid rounded-circle" src="{% if form.foto_profile.value %}{{ form.foto_profile.value.url }}{% else %}/static/assets/img/default-avatar.png{% endif %}" alt="Profile Picture">
+                        <h5 class="title text-center">{{ form.username.value }}</h5>
+                    </div>
+                    <div class="card-description text-center">
+                        {{ form.about.value }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

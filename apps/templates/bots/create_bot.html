@@ -1,0 +1,124 @@
+<!-- File: apps/templates/bots/create_bot.html -->
+
+{% extends 'dashboard/base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <!-- Card untuk Formulir -->
+    <div class="card shadow-lg" style="border-radius: 15px;">
+        <div class="card-header text-center bg-primary text-white" style="border-radius: 15px 15px 0 0;">
+            <h5 class="card-title"><i class="bi bi-bot-fill"></i> Buat Bot Baru</h5>
+        </div>
+        <div class="card-body">
+            <!-- Form untuk Bot -->
+            <form method="post">
+                {% csrf_token %}
+
+                <!-- Form Group untuk Platform (muncul pertama) -->
+                <div class="form-group mb-4">
+                    <label class="form-label fw-bold">
+                        <i class="bi bi-device-screenshot"></i> Platform
+                    </label>
+                    <div class="btn-group d-flex justify-content-center" role="group" aria-label="Platform">
+                        <input type="radio" name="bot_type" id="telegram" value="telegram" {% if form.bot_type.value == 'telegram' %}checked{% endif %} onclick="toggleFields()" class="btn-check">
+                        <label class="btn btn-outline-primary" for="telegram"><i class="bi bi-telegram"></i> Telegram</label>
+                        
+                        <input type="radio" name="bot_type" id="whatsapp" value="whatsapp" {% if form.bot_type.value == 'whatsapp' %}checked{% endif %} onclick="toggleFields()" class="btn-check">
+                        <label class="btn btn-outline-primary" for="whatsapp"><i class="bi bi-whatsapp"></i> WhatsApp</label>
+                    </div>
+                </div>
+
+                <!-- Form Group untuk Nama -->
+                <div class="form-group mb-4">
+                    <label for="{{ form.name.id_for_label }}" class="fw-bold">
+                        <i class="bi bi-chat-dots"></i> Nama
+                    </label>
+                    <input type="text" name="name" id="{{ form.name.id_for_label }}" value="{{ form.name.value }}" class="form-control {% if form.name.errors %}is-invalid{% endif %}">
+                    {% for error in form.name.errors %}
+                        <div class="invalid-feedback">{{ error }}</div>
+                    {% endfor %}
+                </div>
+
+                <!-- Form Group untuk Token (hanya untuk Telegram) -->
+                <div class="form-group mb-4" id="token-field">
+                    <label for="{{ form.token_telegram.id_for_label }}" class="fw-bold">
+                        <i class="bi bi-lock-fill"></i> Token
+                    </label>
+                    <input type="text" name="token_telegram" id="{{ form.token_telegram.id_for_label }}" value="{{ form.token_telegram.value }}" class="form-control {% if form.token_telegram.errors %}is-invalid{% endif %}">
+                    {% for error in form.token_telegram.errors %}
+                        <div class="invalid-feedback">{{ error }}</div>
+                    {% endfor %}
+                </div>
+
+                <!-- Button Submit -->
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary btn-lg">
+                        <i class="bi bi-bot-fill"></i> Buat Bot
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <!-- Modal untuk Pesan Error -->
+    {% if form.errors %}
+    <div class="modal fade" id="errorModal" tabindex="-1" aria-labelledby="errorModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header bg-danger text-white">
+                    <h1 class="modal-title fs-5" id="errorModalLabel">Terjadi Kesalahan</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="alert alert-danger">
+                        {% for field in form %}
+                            {% for error in field.errors %}
+                                <p>{{ error }}</p>
+                            {% endfor %}
+                        {% endfor %}
+                        {% for error in form.non_field_errors %}
+                            <p>{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Pastikan bahwa Bootstrap JavaScript sudah di-load dan jQuery jika diperlukan
+        document.addEventListener('DOMContentLoaded', function () {
+            if (document.querySelector('#errorModal')) {
+                var errorModal = new bootstrap.Modal(document.getElementById('errorModal'));
+                errorModal.show();
+            }
+        });
+    </script>
+    {% endif %}
+</div>
+
+<script>
+    // Fungsi untuk menyembunyikan/menampilkan elemen sesuai platform
+    function toggleFields() {
+        var tokenField = document.getElementById('token-field');
+        var whatsappFields = document.getElementById('whatsapp-fields');
+
+        if (document.getElementById('telegram').checked) {
+            tokenField.classList.remove('d-none');
+            whatsappFields?.classList.add('d-none');
+        } else if (document.getElementById('whatsapp').checked) {
+            tokenField.classList.add('d-none');
+            whatsappFields?.classList.remove('d-none');
+        }
+    }
+
+    // Panggil toggleFields() saat halaman dimuat
+    document.addEventListener('DOMContentLoaded', function () {
+        toggleFields();
+    });
+</script>
+{% endblock %}
+

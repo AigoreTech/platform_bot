@@ -1,0 +1,44 @@
+<!-- File: apps/templates/dashboard/sidebar.html -->
+<div class="offcanvas offcanvas-start sidebar-nav bg-dark" tabindex="-1" id="sidebar">
+  <div class="offcanvas-body p-0">
+    <nav class="navbar-dark">
+      <ul class="navbar-nav">
+        <li>
+          <div class="text-muted small fw-bold text-uppercase px-3">CORE</div>
+        </li>
+        <li>
+          <a href="{% url 'dashboard' %}" class="nav-link px-3 active">
+            <span class="me-2"><i class="bi bi-speedometer2"></i></span>
+            <span>Dashboard</span>
+          </a>
+        </li>
+        <li class="my-4"><hr class="dropdown-divider bg-light"></li>
+				<li>
+          <div class="text-muted small fw-bold text-uppercase px-3">BOTS</div>
+        </li>
+        <li>
+          <a href="{% url 'create_bot' %}" class="nav-link px-3">
+            <span class="me-2"><i class="bi bi-plus-circle-fill"></i></span>
+            <span>Buat Bot</span>
+          </a>
+        </li>
+        <li>
+          <a href="{% url 'manage_bots' %}" class="nav-link px-3">
+            <span class="me-2"><i class="bi bi-gear-wide-connected"></i></span>
+            <span>Manage Bots</span>
+          </a>
+        </li>
+        <li class="my-4"><hr class="dropdown-divider bg-light"></li>
+        <li>
+          <div class="text-muted small fw-bold text-uppercase px-3 mb-3">Account</div>
+        </li>
+        <li>
+          <a href="{% url 'logout' %}" class="nav-link px-3 text-danger">
+            <span class="me-2"><i class="bi bi-box-arrow-right"></i></span>
+            <span>Logout</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</div>

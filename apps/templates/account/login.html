@@ -1,0 +1,94 @@
+<!-- File: apps/templates/account/login.html -->
+
+{% extends 'home/base.html' %}
+
+{% block title %}Login - Platform Bot{% endblock %}
+
+{% block content %}
+<div class="content" style="background-color: #f4f6f9; min-height: 100vh;">
+    <div class="container">
+        <!-- Display Django messages -->
+        {% if messages %}
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                {% for message in messages %}
+                <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                    <i class="bi bi-info-circle-fill"></i> {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+
+        <div class="row pt-5">
+            <div class="col-md-6 mt-5 offset-md-3 pt-5 mt-5">
+                <div class="card shadow-lg" style="border-radius: 15px;">
+                    <div class="card-header text-center py-4 bg-primary text-white" style="border-radius: 15px 15px 0 0;">
+                        <h4 class="title">
+                            <i class="bi bi-box-arrow-in-right"></i> Login ke Platform Bot
+                        </h4>
+                    </div>
+                    <div class="card-body px-5 py-4">
+                        <form method="post" id="login-form">
+                            {% csrf_token %}
+                            <!-- Username Input -->
+                            <div class="form-group mb-3">
+                                <label class="fw-bold" for="id_username">
+                                    <i class="bi bi-person-fill"></i> Username
+                                </label>
+                                <div class="input-group">
+                                    <span class="input-group-text bg-primary text-white">
+                                        <i class="bi bi-person-circle"></i>
+                                    </span>
+                                    {{ form.username }}
+                                </div>
+                                {% if form.username.errors %}
+                                <div class="text-danger">
+                                    <i class="bi bi-exclamation-circle-fill"></i> {{ form.username.errors }}
+                                </div>
+                                {% endif %}
+                            </div>
+
+                            <!-- Password Input -->
+                            <div class="form-group mb-3">
+                                <label class="fw-bold" for="id_password">
+                                    <i class="bi bi-lock-fill"></i> Password
+                                </label>
+                                <div class="input-group">
+                                    <span class="input-group-text bg-primary text-white">
+                                        <i class="bi bi-shield-lock-fill"></i>
+                                    </span>
+                                    {{ form.password }}
+                                </div>
+                                {% if form.password.errors %}
+                                <div class="text-danger">
+                                    <i class="bi bi-exclamation-circle-fill"></i> {{ form.password.errors }}
+                                </div>
+                                {% endif %}
+                            </div>
+
+                            <!-- Login Button -->
+                            <div class="text-center mt-4">
+                                <button type="submit" class="btn btn-primary btn-lg">
+                                    <i class="bi bi-box-arrow-in-right"></i> Login
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- Register Link -->
+                    <div class="card-footer text-center">
+                        <p>Belum punya akun? 
+                            <a href="{% url 'register' %}" class="text-primary fw-bold">
+                                <i class="bi bi-pencil-square"></i> Daftar
+                            </a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+

@@ -1,0 +1,63 @@
+{% extends 'dashboard/base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="card shadow-sm border-0">
+        <div class="card-header bg-primary text-white">
+            <h5 class="card-title">
+                <i class="bi bi-pencil-square"></i> Edit Bot: {{ bot.name }}
+            </h5>
+        </div>
+        <div class="card-body bg-light">
+            <form method="post">
+                {% csrf_token %}
+                
+                <!-- Bot Name -->
+                <div class="mb-3">
+                    <label for="id_name" class="form-label"><i class="bi bi-robot"></i> Bot Name</label>
+                    {{ form.name }}
+                </div>
+
+                <!-- Bot Token (only for Telegram bots) -->
+                {% if bot.bot_type == 'telegram' %}
+                <div class="mb-3">
+                    <label for="id_token_telegram" class="form-label"><i class="bi bi-key-fill"></i> Telegram Token</label>
+                    {{ form.token_telegram }}
+                </div>
+                {% elif bot.bot_type == 'whatsapp' %}
+                <!-- WhatsApp Bot Token Fields would go here -->
+                {% endif %}
+
+                <!-- Start Message -->
+                <div class="mb-3">
+                    <label for="id_start_message" class="form-label"><i class="bi bi-play-circle"></i> Start Message</label>
+                    {{ form.start_message }}
+                </div>
+
+                <!-- Help Message -->
+                <div class="mb-3">
+                    <label for="id_help_message" class="form-label"><i class="bi bi-info-circle"></i> Help Message</label>
+                    {{ form.help_message }}
+                </div>
+
+                <!-- Description -->
+                <div class="mb-3">
+                    <label for="id_description" class="form-label"><i class="bi bi-file-earmark-text"></i> Description</label>
+                    {{ form.description }}
+                </div>
+
+                <!-- Submit and Back Buttons -->
+                <div class="d-flex justify-content-between mt-4">
+                    <button type="submit" class="btn btn-success">
+                        <i class="bi bi-check-circle"></i> Simpan Perubahan
+                    </button>
+                    <a href="{% url 'manage_bots' %}" class="btn btn-secondary">
+                        <i class="bi bi-arrow-left-circle"></i> Kembali
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
