@@ -29,7 +29,7 @@ SECRET_KEY = 'django-insecure-lu#anum4ptppqr(uk0qdb*%6o-2mapd5=c1!v7=x=j0go62)2@
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-WEBHOOK_URL = 'https://57db-2404-c0-2b10-00-daf-d6e.ngrok-free.app'  # Ganti dengan URL ngrok yang didapat
+WEBHOOK_URL = 'https://1amkaizen.pythonanywhere.com'  # Ganti dengan URL ngrok yang didapat
 ALLOWED_HOSTS = ['*']
 
 
