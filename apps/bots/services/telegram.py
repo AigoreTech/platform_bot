@@ -23,13 +23,13 @@ def handle_update(update):
             else:
                 response_text = 'Perintah tidak dikenal. Ketik /help untuk melihat daftar perintah.'
 
-        send_message(bot.token, "sendMessage", {
+        send_message(bot.token_telegram, "sendMessage", {
             'chat_id': chat_id,
             'text': response_text
         })
 
-def send_message(token, method, data):
-    telegram_api_url = f'https://api.telegram.org/bot{token}/{method}'
+def send_message(token_telegram, method, data):
+    telegram_api_url = f'https://api.telegram.org/bot{token_telegram}/{method}'
     response = requests.post(telegram_api_url, data=data)
     if response.status_code != 200:
         logger.error(f"Failed to send message: {response.text}")  # Log error jika gagal
