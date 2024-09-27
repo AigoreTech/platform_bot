@@ -9,6 +9,16 @@
         <h1 class="display-6"><i class="bi bi-robot"></i> Manage Your Bots</h1>
         <p class="lead">Easily manage, edit, and monitor your Telegram and WhatsApp bots</p>
     </div>
+<!-- Menampilkan pesan error atau sukses -->
+{% if messages %}
+  <div class="messages">
+    {% for message in messages %}
+      <div class="alert {{ message.tags }} shadow-sm rounded">
+        {{ message }}
+      </div>
+    {% endfor %}
+  </div>
+{% endif %}
 
     <!-- Bots Cards -->
     <div class="row">

@@ -13,22 +13,11 @@
 <div class="row mb-4">
   <div class="col-lg-12">
     <div class="jumbotron text-center bg-primary text-white py-5 shadow-sm rounded">
-      <h2>Selamat Datang di Dashboard, {{ user_profile.user.username }}!</h2>
+      <h2>Selamat Datang di Dashboard,<span class="fw-bold"> {{ user_profile.user.username }}!</span> </h2>
       <p>Di sini Anda dapat mengelola bot, melihat statistik, dan memeriksa log aktivitas terbaru Anda.</p>
     </div>
   </div>
 </div>
-
-<!-- Menampilkan pesan error atau sukses -->
-{% if messages %}
-  <div class="messages">
-    {% for message in messages %}
-      <div class="alert {{ message.tags }} shadow-sm rounded">
-        {{ message }}
-      </div>
-    {% endfor %}
-  </div>
-{% endif %}
 
 <!-- Cards Section -->
 <div class="row">
